@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kelsey Rocket | Happy Birthday</title>
+    <meta
+      name="description"
+      content="A story-driven birthday experience moving through freedom, ambition, rebellion, competition, and identity."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ivory: "#fffaeb",
+              cream: "#fff0c2",
+              blackm: "#1f1f1f",
+              orange: "#fa520f",
+              flame: "#fb6424",
+              amberm: "#ffa110",
+              gold: "#ffd900",
+            },
+            boxShadow: {
+              golden:
+                "rgba(127, 99, 21, 0.12) -8px 16px 39px, rgba(127, 99, 21, 0.10) -33px 64px 72px, rgba(127, 99, 21, 0.06) -73px 144px 97px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: Arial, ui-sans-serif, system-ui, sans-serif;
+        background: #fffaeb;
+        color: #1f1f1f;
+      }
+
+      .hero-title {
+        letter-spacing: -2.05px;
+        line-height: 0.98;
+      }
+
+      .scene {
+        min-height: 100vh;
+        isolation: isolate;
+      }
+
+      .scene-media {
+        background:
+          linear-gradient(135deg, rgba(255, 217, 0, 0.86), rgba(255, 161, 16, 0.74) 42%, rgba(250, 82, 15, 0.76)),
+          radial-gradient(circle at 22% 18%, rgba(255, 255, 255, 0.42), transparent 30%),
+          #fff0c2;
+      }
+
+      .scene-media img,
+      .scene-media video {
+        height: 100%;
+        min-height: 48vh;
+        width: 100%;
+        object-fit: cover;
+        filter: saturate(1.1) contrast(1.02) sepia(0.12);
+      }
+
+      .scene-media iframe {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      .scene-media iframe {
+        border: 0;
+      }
+
+      .scene-media img.missing {
+        display: none;
+      }
+
+      .scene-media.is-missing::after {
+        content: attr(data-fallback);
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+        color: rgba(31, 31, 31, 0.6);
+        font-size: clamp(2.5rem, 9vw, 7rem);
+        line-height: 0.9;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .meter-fill {
+        transform-origin: left center;
+        animation: fillIn 1.2s ease both;
+      }
+
+      .confetti {
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        overflow: hidden;
+      }
+
+      .confetti span {
+        position: absolute;
+        top: -12px;
+        width: 8px;
+        height: 18px;
+        background: var(--confetti-color);
+        animation: confettiFall var(--confetti-speed) linear infinite;
+        animation-delay: var(--confetti-delay);
+        left: var(--confetti-left);
+        opacity: 0.85;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 700ms ease, transform 700ms ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes fillIn {
+        from {
+          transform: scaleX(0);
+        }
+        to {
+          transform: scaleX(1);
+        }
+      }
+
+      @keyframes confettiFall {
+        from {
+          transform: translate3d(0, -16px, 0) rotate(0deg);
+        }
+        to {
+          transform: translate3d(42px, 110vh, 0) rotate(540deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .reveal,
+        .meter-fill,
+        .confetti span {
+          animation: none;
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen overflow-x-hidden">
+    <nav class="fixed left-0 right-0 top-0 z-50 border-b border-blackm/10 bg-ivory/85 backdrop-blur">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+        <a href="#landing" class="flex items-center gap-2 uppercase tracking-[0.18em] text-sm">
+          <span class="grid h-7 w-7 grid-cols-2 overflow-hidden">
+            <span class="bg-gold"></span>
+            <span class="bg-amberm"></span>
+            <span class="bg-flame"></span>
+            <span class="bg-orange"></span>
+          </span>
+          Kelsey aka Rocket
+        </a>
+        <div
+          id="site-menu"
+          class="absolute left-0 right-0 top-full hidden border-b border-blackm/10 bg-ivory px-4 py-5 text-sm uppercase tracking-[0.12em] md:static md:flex md:border-0 md:bg-transparent md:p-0"
+        >
+          <div class="grid gap-4 md:flex md:items-center md:gap-5">
+            <a href="#horse" class="hover:text-orange">Ride</a>
+            <a href="#sky" class="hover:text-orange">Fly</a>
+            <a href="#bike" class="hover:text-orange">Roar</a>
+            <a href="#car" class="hover:text-orange">Race</a>
+            <a href="#arena" class="hover:text-orange">Stream</a>
+            <a href="#final" class="hover:text-orange">Final</a>
+          </div>
+        </div>
+        <button
+          id="menu-toggle"
+          class="ml-auto mr-3 grid h-11 w-11 place-items-center border border-blackm/15 md:hidden"
+          type="button"
+          aria-controls="site-menu"
+          aria-expanded="false"
+          aria-label="Open menu"
+        >
+          <span class="grid gap-1.5">
+            <span class="block h-0.5 w-5 bg-blackm"></span>
+            <span class="block h-0.5 w-5 bg-blackm"></span>
+            <span class="block h-0.5 w-5 bg-blackm"></span>
+          </span>
+        </button>
+      </div>
+    </nav>
+
+    <main>
+      <section id="landing" class="scene flex items-center bg-ivory px-4 pt-20 sm:px-6">
+        <div class="mx-auto grid max-w-7xl gap-10 py-16 lg:grid-cols-[1fr_0.8fr] lg:items-end">
+          <div class="reveal">
+            <p class="mb-5 text-sm uppercase tracking-[0.22em] text-orange">Happy Birthday</p>
+            <h1 class="hero-title text-[clamp(3.2rem,10vw,8.4rem)] font-normal">
+              This is not a birthday page.
+              <span class="block text-orange">This is your world.</span>
+            </h1>
+          </div>
+          <div class="reveal shadow-golden bg-cream p-5">
+            <div class="mb-6 grid grid-cols-6 gap-1">
+              <span class="h-12 bg-gold"></span>
+              <span class="h-12 bg-[#ffe295]"></span>
+              <span class="h-12 bg-amberm"></span>
+              <span class="h-12 bg-[#ff8105]"></span>
+              <span class="h-12 bg-flame"></span>
+              <span class="h-12 bg-orange"></span>
+            </div>
+            <p class="text-3xl leading-tight sm:text-5xl">
+              Kelsey. Rocket. Freedom. Ambition. Rebellion. Competition. Identity.
+            </p>
+            <p class="mt-8 text-base leading-7 text-blackm/70">
+              boahhh... this one moves scene by scene, the way your life does.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="horse" class="scene grid bg-cream pt-20 lg:grid-cols-2">
+        <div class="scene-media relative min-h-[48vh] overflow-hidden" data-fallback="Ride">
+          <video autoplay muted loop playsinline aria-label="Horseback riding">
+            <source src="https://media.tenor.com/NMw_p_x4ih4AAAPo/horseback-riding-lux-lyall.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="reveal flex items-center px-5 py-16 sm:px-10">
+          <div class="max-w-xl">
+            <p class="mb-5 text-sm uppercase tracking-[0.22em] text-orange">Horse Riding - Freedom</p>
+            <h2 class="hero-title text-[clamp(2.8rem,7vw,6rem)] font-normal">You don't walk through life. You ride.</h2>
+            <div class="mt-8 space-y-4 text-2xl leading-tight sm:text-3xl">
+              <p>The way you move... it's never slow, never unsure.</p>
+              <p>boahhh... even the ground knows your rhythm.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sky" class="scene grid bg-ivory pt-20 lg:grid-cols-2">
+        <div class="reveal order-2 flex items-center px-5 py-16 sm:px-10 lg:order-1">
+          <div class="max-w-xl">
+            <p class="mb-5 text-sm uppercase tracking-[0.22em] text-orange">Flying - Ambition</p>
+            <h2 class="hero-title text-[clamp(2.8rem,7vw,6rem)] font-normal">
+              Most people look at the sky.
+              <span class="block text-orange">You went higher.</span>
+            </h2>
+            <p class="mt-8 text-2xl leading-tight sm:text-3xl">
+              Rocket, the way you fly... i swear to god... it's different.
+            </p>
+            <div class="mt-10 bg-blackm p-5 text-white">
+              <p class="text-sm uppercase tracking-[0.18em] text-amberm">Altitude</p>
+              <p class="mt-3 text-5xl leading-none">101,871</p>
+              <p class="mt-3 text-white/70">views turning into scale, height, and proof.</p>
+            </div>
+          </div>
+        </div>
+        <div class="scene-media relative order-1 min-h-[48vh] overflow-hidden lg:order-2" data-fallback="Fly">
+          <img src="https://media.giphy.com/media/l41YxlF6dntxn5csw/giphy.gif" alt="Flying light aircraft" />
+        </div>
+      </section>
+
+      <section id="bike" class="scene grid bg-blackm pt-20 text-white lg:grid-cols-2">
+        <div class="scene-media relative min-h-[48vh] overflow-hidden" data-fallback="Roar">
+          <video autoplay muted loop playsinline aria-label="Motorcycle riding">
+            <source src="https://media.tenor.com/FcmjOfQKuBIAAAPo/basile-basilou.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="reveal flex items-center px-5 py-16 sm:px-10">
+          <div class="max-w-xl">
+            <p class="mb-5 text-sm uppercase tracking-[0.22em] text-amberm">Bike Riding - Rebellion</p>
+            <h2 class="hero-title text-[clamp(2.8rem,7vw,6rem)] font-normal">Rules were never written for you.</h2>
+            <div class="mt-8 space-y-4 text-2xl leading-tight sm:text-3xl">
+              <p>Freedom has a sound... yours is louder.</p>
+              <p>the way Rocket rides... it doesn't ask permission.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="car" class="scene grid bg-cream pt-20 lg:grid-cols-2">
+        <div class="reveal order-2 flex items-center px-5 py-16 sm:px-10 lg:order-1">
+          <div class="max-w-xl">
+            <p class="mb-5 text-sm uppercase tracking-[0.22em] text-orange">Car Racing - Competition</p>
+            <h2 class="hero-title text-[clamp(2.8rem,7vw,6rem)] font-normal">
+              You don't chase speed.
+              <span class="block text-orange">Speed follows you.</span>
+            </h2>
+            <p class="mt-8 text-2xl leading-tight sm:text-3xl">
+              Every turn... every move... the way you control it.
+            </p>
+            <div class="mt-10">
+              <div class="mb-3 flex justify-between text-sm uppercase tracking-[0.18em]">
+                <span>Acceleration</span>
+                <span>+794 subscribers</span>
+              </div>
+              <div class="h-4 bg-blackm/15">
+                <div class="meter-fill h-full w-[76%] bg-orange"></div>
+              </div>
+              <p class="mt-4 text-blackm/70">Recent growth, moving like a launch.</p>
+            </div>
+          </div>
+        </div>
+        <div class="scene-media relative order-1 min-h-[48vh] overflow-hidden lg:order-2" data-fallback="Race">
+          <video autoplay muted loop playsinline aria-label="Dodge Demon drifting">
+            <source src="https://media.tenor.com/jnGiHD6s-ysAAAPo/dodge-demon-drift.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
+      <section id="arena" class="scene grid bg-ivory pt-20 lg:grid-cols-2">
+        <div class="scene-media relative min-h-[48vh] overflow-hidden" data-fallback="Stream">
+          <img
+            src="assets/streamer.png.png"
+            alt="Kelsey streaming and gaming"
+            class="h-full min-h-[48vh] w-full object-cover"
+          />
+        </div>
+        <div class="reveal flex items-center px-5 py-16 sm:px-10">
+          <div class="max-w-xl">
+            <p class="mb-5 text-sm uppercase tracking-[0.22em] text-orange">Gaming / Streaming - Identity</p>
+            <h2 class="hero-title text-[clamp(2.8rem,7vw,6rem)] font-normal">
+              You didn't just play the game.
+              <span class="block text-orange">You became the stream.</span>
+            </h2>
+            <p class="mt-8 text-2xl leading-tight sm:text-3xl">
+              mahh sweetest Rocket... my best friend, my well wisher, hehe mahh husband.
+            </p>
+            <p class="mt-5 text-2xl leading-tight text-blackm/75 sm:text-3xl">
+              Your jai jai will always love you, always cheer for you, and always pray that every road,
+              sky, ride, race, and game brings you closer to the life you deserve.
+            </p>
+            <div class="mt-10 grid gap-3 sm:grid-cols-3">
+              <div class="bg-cream p-4">
+                <p class="text-sm uppercase tracking-[0.16em] text-orange">Momentum</p>
+                <p class="mt-3 text-4xl">1,050</p>
+                <p class="text-sm text-blackm/65">subscribers</p>
+              </div>
+              <div class="bg-cream p-4">
+                <p class="text-sm uppercase tracking-[0.16em] text-orange">Consistency</p>
+                <p class="mt-3 text-4xl">81</p>
+                <p class="text-sm text-blackm/65">uploads</p>
+              </div>
+              <div class="bg-cream p-4">
+                <p class="text-sm uppercase tracking-[0.16em] text-orange">Surge</p>
+                <p class="mt-3 text-4xl">55K</p>
+                <p class="text-sm text-blackm/65">views in 30 days</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="final" class="scene flex items-center bg-blackm px-4 py-24 text-white sm:px-6">
+        <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.7fr] lg:items-center">
+          <div>
+          <div class="mb-10 grid max-w-md grid-cols-6 gap-1">
+            <span class="h-14 bg-gold"></span>
+            <span class="h-14 bg-[#ffe295]"></span>
+            <span class="h-14 bg-amberm"></span>
+            <span class="h-14 bg-[#ff8105]"></span>
+            <span class="h-14 bg-flame"></span>
+            <span class="h-14 bg-orange"></span>
+          </div>
+          <div class="reveal max-w-5xl">
+            <p class="hero-title text-[clamp(3rem,8vw,7rem)] font-normal">This is what the world sees.</p>
+            <p class="hero-title mt-3 text-[clamp(3rem,8vw,7rem)] font-normal text-amberm">But this is who you are.</p>
+            <div class="mt-10 space-y-3 text-3xl leading-tight text-white/90 sm:text-5xl">
+              <p>You don't fit into one story.</p>
+              <p>So I built you many.</p>
+              <p class="text-orange">Happy Birthday, Kelsey.</p>
+            </div>
+          </div>
+          </div>
+          <div class="scene-media relative min-h-[320px] overflow-hidden shadow-golden" data-fallback="Happy Birthday">
+            <video autoplay muted loop playsinline aria-label="Happy birthday celebration">
+              <source src="https://media.tenor.com/130g-c6hHsIAAAPo/winnie-the-pooh-tigger.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="confetti" aria-hidden="true"></div>
+
+    <script>
+      const menuToggle = document.querySelector("#menu-toggle");
+      const siteMenu = document.querySelector("#site-menu");
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", String(!isOpen));
+        menuToggle.setAttribute("aria-label", isOpen ? "Open menu" : "Close menu");
+        siteMenu.classList.toggle("hidden", isOpen);
+      });
+
+      siteMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.setAttribute("aria-label", "Open menu");
+          siteMenu.classList.add("hidden");
+        });
+      });
+
+      const confettiColors = ["#ffd900", "#ffe295", "#ffa110", "#ff8105", "#fb6424", "#fa520f"];
+      const confetti = document.querySelector(".confetti");
+      for (let index = 0; index < 42; index += 1) {
+        const piece = document.createElement("span");
+        piece.style.setProperty("--confetti-left", `${Math.random() * 100}%`);
+        piece.style.setProperty("--confetti-delay", `${Math.random() * -8}s`);
+        piece.style.setProperty("--confetti-speed", `${5 + Math.random() * 5}s`);
+        piece.style.setProperty("--confetti-color", confettiColors[index % confettiColors.length]);
+        confetti.appendChild(piece);
+      }
+
+      document.querySelectorAll(".scene-media img").forEach((img) => {
+        const markMissing = () => {
+          img.classList.add("missing");
+          img.closest(".scene-media").classList.add("is-missing");
+        };
+
+        img.addEventListener("error", markMissing);
+        if (img.complete && img.naturalWidth === 0) markMissing();
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.18 }
+      );
+
+      document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+    </script>
+  </body>
+</html>
